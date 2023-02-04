@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      dockerfile: src/app/Dockerfile
+    depends_on:
+      - tunnel
+    volumes:
+      - connections:/home/node/connections
+
+  tunnel:
+    build:
+      dockerfile: src/tunnel/Dockerfile
+      build-args:
+        SEQ_URL: http://seq:5342
+        SEQ_API_KEY: key
+    depends_on:
+      - seq
+    environment:
+      SERVER_PATH: /home/tunnel/connections/server.sock
+      TUNNELS_PATH: /home/tunnel/connections/tunnels
+    volumes:
+      - connections:/home/tunnel/connections
+
+  web:
+    build:
+      dockerfile: src/web/Dockerfile
+    ports:
+      - "5000:80"
+
+  seq:
+    image: datalust/seq:latest
+    environment:
+      ACCEPT_EULA: Y
+    volumes:
+      - seqdata:/data
+
+volumes:
+  connections:
+  seqdata:

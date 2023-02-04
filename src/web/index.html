@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tunnel Mannager</title>
+	<style>
+		:root {
+			color-scheme: light dark;
+		}
+
+		body {
+			width: 35em;
+			margin: 0 auto;
+		}
+
+		[tunnel-state="normal"] {
+			background-color: #11aa22;
+		}
+
+		[tunnel-state="check"] {
+			background-color: #2211aa;
+		}
+
+		[tunnel-state="fail"] {
+			background-color: #aa2211;
+		}
+	</style>
+</head>
+
+<body>
+	<!--
+		Basic idea:
+			* A form to request `start`
+			* A list of existing connections that automatically `status`
+				* Items will have a button to close the connection.
+				* Items will have an edit button which puts their data back into the start form.
+				* Items will have a delete button to remove the configuration from the list.
+				* Items will normally have green background.
+				* Items will have have blue background during `status` request,
+					plus some delay for appearence.
+				* Items will turn red if status check fails
+					* Adds button to re-open connection
+	-->
+
+	<div>
+		<input type="number" name="local-port">
+		<input type="string" name="tunnel-name">
+		<input type="number" name="tunnel-port">
+		<input type="string" name="remote-host">
+		<button>Open Tunnel</button>
+		<loading-icon></loading-icon>
+	</div>
+
+	<div>
+		<ul class="tunnel-list"></ul>
+	</div>
+
+	<template id="item">
+		<li>
+			<div tunnel-state="normal">
+				<button>edit</button>
+				<div>
+					<div data-local-port=""></div>
+					<div data-tunnel-name=""></div>
+					<div data-tunnel-port=""></div>
+				</div>
+				<button>close</button>
+			</div>
+		</li>
+	</template>
+
+	<script type="module">
+		const form = document.querySelector('form');
+		const tunnelState = [
+			"normal",
+			"check",
+			"fail",
+		];
+		async function start() { }
+		async function status() { }
+		async function stop() { }
+		async function tunnels() { }
+	</script>
+</body>
+
+</html>
