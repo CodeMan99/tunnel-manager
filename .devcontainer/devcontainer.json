@@ -1,6 +1,6 @@
 {
 	"name": "Tunnel Manager",
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:0-18-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bookworm",
 	"customizations": {
 		"vscode": {
 			"extensions": [
