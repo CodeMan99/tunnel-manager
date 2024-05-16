@@ -1,4 +1,4 @@
-version: '3.8'
+name: tm
 
 services:
   app:
@@ -12,8 +12,8 @@ services:
   tunnel:
     build:
       dockerfile: src/tunnel/Dockerfile
-      build-args:
-        SEQ_URL: http://seq:5342
+      args:
+        SEQ_INGESTION_URL: http://seq:5342
         SEQ_API_KEY: key
     depends_on:
       - seq

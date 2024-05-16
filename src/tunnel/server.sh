@@ -27,7 +27,7 @@ function cleanup() {
 
 function info() {
 	local message="$1"; shift
-	TZ=UTC printf "INFO %(%F %T %Z)T: $message\n" $(date +%s) "$@"
+	TZ=UTC printf "INFO %(%FT%TZ)T: $message\n" $(date +%s) "$@"
 	## TODO log directly to Seq.
 	# seqcli log -m "$message" -p ProcessID="$PID" -p name=socket_server
 }
